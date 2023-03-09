@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "306209661529",
+    "project_id": "challengermovies-ef66e",
+    "storage_bucket": "challengermovies-ef66e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306209661529:android:0d65e3978d8234ee048748",
+        "android_client_info": {
+          "package_name": "com.challengermovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306209661529-umf1etm38ji7k9oh06f4fkk5ut1n1kuf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.challengermovies",
+            "certificate_hash": "e5f17490677e0460fb810237b1bba6faff229332"
+          }
+        },
+        {
+          "client_id": "306209661529-5mdf5ao20d1hs3nvd57jm95tbk1p8o7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCViWtM3SXiNJakKyFxPqQEMPK-xT88288"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306209661529-5mdf5ao20d1hs3nvd57jm95tbk1p8o7d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306209661529-b9frmfkgnf1fslaq31m6k8vu5m38b3ph.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.ChallengerMovies"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
