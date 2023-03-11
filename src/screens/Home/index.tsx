@@ -11,22 +11,14 @@ import PopularSection from './PopularSection';
 import TopRatedSection from './TopRatedSection';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 
-type HomeScreenRouteProp = PrivateStackRouteProp<'Home'>;
-
 const ScrollableScreen = styled.ScrollView`
   /* padding: 0 0 0 8px; */
 `;
 
 export default function HomeScreen() {
-  const navigation = useNavigation<HomeScreenRouteProp>();
-
   return (
     <ScreenContainer>
       <ScrollableScreen>
-        <Button
-          label="Profile"
-          onPress={() => navigation.navigate('Profile')}
-        />
         <NextMoviesSection />
         <NowPlayingSection />
         <PopularSection />
