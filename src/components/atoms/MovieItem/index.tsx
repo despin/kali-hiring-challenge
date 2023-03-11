@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {LazyLoadImage} from 'react-native-lazy-load-image';
-import useGenres from '../../../hooks/useGenres';
-import {Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import GenreBadgeRow from '../GenreBadgeRow';
 
 const CardContainer = styled.TouchableOpacity`
   background-color: #fff4;
@@ -18,8 +18,11 @@ const CardInfoContainer = styled.View`
   padding: 8px;
 `;
 
-const CardText = styled.Text`
-  color: white;
+const PosterImage = styled(LazyLoadImage)`
+  width: 100;
+  height: 150;
+  aspect-ratio: 2 / 3;
+  border-radius: 10;
 `;
 
 const MovieTitle = styled.Text`
@@ -27,7 +30,6 @@ const MovieTitle = styled.Text`
   color: white;
   font-weight: bold;
   flex-shrink: 1;
-  /* background-color: #faf; */
 `;
 const MovieOriginalTitle = styled.Text`
   font-size: 14px;
@@ -43,12 +45,10 @@ const MovieYear = styled.Text`
   margin-left: 8px;
   color: grey;
   font-weight: bold;
-  /* background-color: #ffa; */
 `;
 const MovieOverview = styled.Text`
   font-size: 16px;
   color: grey;
-  /* background-color: #ffa; */
 `;
 const InfoRow = styled.View`
   flex-direction: row;
@@ -58,33 +58,18 @@ const InfoRow = styled.View`
   flex-wrap: nowrap;
   flex-flow: nowrap;
 `;
-const GenreText = styled.Text`
-  color: white;
-  padding: 2px;
-  border-color: white;
-  border-width: 1px;
-  border-radius: 2px;
-  margin-right: 6px;
-  margin-top: 8px;
-`;
-
 type MovieItemProps = {
   item: {genre_ids: number[]};
 };
 
 export default function MovieItem({item}: MovieItemProps) {
-  const genres = useGenres();
+  const navigation = useNavigation();
 
   return (
-    <CardContainer>
-      <LazyLoadImage
+    <CardContainer
+      onPress={() => navigation.navigate('Details', {movie: item})}>
+      <PosterImage
         source={{uri: `https://image.tmdb.org/t/p/w500${item?.poster_path}`}}
-        style={{
-          width: 100,
-          height: 150,
-          aspectRatio: 2 / 3,
-          borderRadius: 10,
-        }}
       />
       <CardInfoContainer>
         <InfoRow>
@@ -101,12 +86,7 @@ export default function MovieItem({item}: MovieItemProps) {
           <MovieOverview numberOfLines={3}>{item?.overview}</MovieOverview>
         </InfoRow>
         <InfoRow>
-          {item?.genre_ids
-            ?.map(id => genres?.find(gId => gId.id == id)?.name)
-            ?.sort()
-            ?.map(name => (
-              <GenreText>{name}</GenreText>
-            ))}
+          <GenreBadgeRow genreIds={item?.genre_ids} />
         </InfoRow>
       </CardInfoContainer>
     </CardContainer>

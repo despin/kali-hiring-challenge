@@ -35,12 +35,14 @@ export default function SearchScreen() {
   const handleSearchQuery = async (searchQuery: string) => {
     setIsLoading(true);
     setShowPreviousQueries(false);
-    const data = await requestMovieDb(
-      `/search/movie?language=es-AR&query=${searchQuery}}&page=1&region=AR`,
-    );
-    setList(data.results);
-    dispatch(pushNewQuery(searchQuery));
-    setIsLoading(false);
+    setTimeout(async () => {
+      const data = await requestMovieDb(
+        `/search/movie?language=es-AR&query=${searchQuery}}&page=1&region=AR`,
+      );
+      setList(data.results);
+      dispatch(pushNewQuery(searchQuery));
+      setIsLoading(false);
+    }, 4000);
   };
 
   useFocusEffect(() => {
@@ -69,21 +71,21 @@ export default function SearchScreen() {
         <ContentLoader
           speed={2}
           width={476}
-          height={300}
-          viewBox="0 0 476 300"
+          height={1000}
+          viewBox="0 0 476 1000"
           backgroundColor="#0e0b0b"
           foregroundColor="#a69b9b">
-          {[0, 170, 340, 510].map(x => (
-            <Fragment>
-              <Rect x={x + 8} y="7" rx="16" ry="16" width="102" height="154" />
-              <Rect x={x + 120} y="16" rx="0" ry="0" width="215" height="18" />
-              <Rect x={x + 344} y="16" rx="0" ry="0" width="50" height="18" />
-              <Rect x={x + 120} y="39" rx="0" ry="0" width="161" height="14" />
-              <Rect x={x + 289} y="39" rx="0" ry="0" width="79" height="14" />
-              <Rect x={x + 120} y="60" rx="0" ry="0" width="305" height="55" />
-              <Rect x={x + 119} y="126" rx="0" ry="0" width="52" height="25" />
-              <Rect x={x + 176} y="126" rx="0" ry="0" width="66" height="26" />
-              <Rect x={x + 247} y="126" rx="0" ry="0" width="105" height="26" />
+          {[0, 170, 340, 510, 687, 857].map(y => (
+            <Fragment key={y}>
+              <Rect x="8" y={7 + y} rx="16" ry="16" width="102" height="154" />
+              <Rect x="120" y={16 + y} rx="0" ry="0" width="215" height="18" />
+              <Rect x="344" y={16 + y} rx="0" ry="0" width="50" height="18" />
+              <Rect x="120" y={39 + y} rx="0" ry="0" width="161" height="14" />
+              <Rect x="289" y={39 + y} rx="0" ry="0" width="79" height="14" />
+              <Rect x="120" y={60 + y} rx="0" ry="0" width="305" height="55" />
+              <Rect x="119" y={126 + y} rx="0" ry="0" width="52" height="25" />
+              <Rect x="176" y={126 + y} rx="0" ry="0" width="66" height="26" />
+              <Rect x="247" y={126 + y} rx="0" ry="0" width="105" height="26" />
             </Fragment>
           ))}
         </ContentLoader>

@@ -11,11 +11,10 @@ import {
 } from '../screens';
 import {StatusBar} from 'react-native';
 import IconButton from '../components/atoms/IconButton';
-import SearchBar from '../components/atoms/SearchBar';
 
 export type PrivateStackParamList = {
   Home: undefined;
-  Details: {movieId: number};
+  Details: {movie: any};
   Search: undefined;
   Profile: undefined;
 };

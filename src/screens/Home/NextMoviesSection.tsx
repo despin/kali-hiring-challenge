@@ -1,6 +1,8 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import ContentLoader, {Rect} from 'react-content-loader/native';
 import {Dimensions, View, Text} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-reanimated-carousel';
 import styled from 'styled-components/native';
@@ -8,6 +10,10 @@ import requestMovieDb from '../../api';
 import SectionContainer from '../../components/atoms/SectionContainer';
 import SectionTitle from '../../components/atoms/SectionTitle';
 import useCustomSWR from '../../hooks/useCustomSWR';
+
+const CarouselButton = styled.TouchableOpacity`
+  flex: 1;
+`;
 
 const ImageBackground = styled.ImageBackground`
   flex: 1;
@@ -48,6 +54,8 @@ export default function NextMoviesSection() {
 
   const width = Dimensions.get('window').width;
 
+  const navigation = useNavigation();
+
   return (
     <SectionContainer>
       <SectionTitle>Upcoming! 🍿</SectionTitle>
@@ -55,8 +63,8 @@ export default function NextMoviesSection() {
         <ContentLoader
           speed={2}
           width={436}
-          height={220}
-          viewBox="0 0 436 220"
+          height={214}
+          viewBox="0 0 436 214"
           backgroundColor={'#333'}
           foregroundColor={'#999'}>
           <Rect x="23" y="19" rx="16" ry="16" width="398" height="175" />
@@ -71,21 +79,26 @@ export default function NextMoviesSection() {
           data={data?.results.filter(item => item?.backdrop_path)}
           scrollAnimationDuration={1000}
           renderItem={({item}) => (
-            <ImageBackground
-              imageStyle={{borderRadius: 16}}
-              source={{
-                uri: `https://image.tmdb.org/t/p/w500${item?.backdrop_path}`,
-              }}>
-              <Gradient colors={['#0000', '#000']}>
-                <ItemReleaseDate>Release: {item?.release_date}</ItemReleaseDate>
-                <ItemTitle>
-                  {item?.title}
-                  {item?.title !== item?.original_title && (
-                    <ItemOriginalTitle>{` (${item?.original_title})`}</ItemOriginalTitle>
-                  )}
-                </ItemTitle>
-              </Gradient>
-            </ImageBackground>
+            <CarouselButton
+              onPress={() => navigation.navigate('Details', {movie: item})}>
+              <ImageBackground
+                imageStyle={{borderRadius: 16}}
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w500${item?.backdrop_path}`,
+                }}>
+                <Gradient colors={['#0000', '#000']}>
+                  <ItemReleaseDate>
+                    Release: {item?.release_date}
+                  </ItemReleaseDate>
+                  <ItemTitle>
+                    {item?.title}
+                    {item?.title !== item?.original_title && (
+                      <ItemOriginalTitle>{` (${item?.original_title})`}</ItemOriginalTitle>
+                    )}
+                  </ItemTitle>
+                </Gradient>
+              </ImageBackground>
+            </CarouselButton>
           )}
         />
       )}
