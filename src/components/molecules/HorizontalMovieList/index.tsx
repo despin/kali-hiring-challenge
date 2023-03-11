@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 import ContentLoader, {Rect} from 'react-content-loader/native';
 import {FlatList} from 'react-native';
 import {LazyLoadImage} from 'react-native-lazy-load-image';
-import SectionContainer from '../atoms/SectionContainer';
-import SectionTitle from '../atoms/SectionTitle';
+import SectionContainer from '../../atoms/SectionContainer';
+import SectionTitle from '../../atoms/SectionTitle';
 
 interface MovieContainerProps {
   first: boolean;

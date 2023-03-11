@@ -5,7 +5,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-reanimated-carousel';
 import styled from 'styled-components/native';
 import requestMovieDb from '../../api';
-import HorizontalMovieList from '../../components/HorizontalMovieList';
 import SectionContainer from '../../components/atoms/SectionContainer';
 import SectionTitle from '../../components/atoms/SectionTitle';
 import useCustomSWR from '../../hooks/useCustomSWR';
