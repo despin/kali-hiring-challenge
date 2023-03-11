@@ -1,10 +1,11 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import ContentLoader, {Rect} from 'react-content-loader/native';
-import {Text} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import requestMovieDb from '../../api';
+import MovieItem from '../../components/atoms/MovieItem';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import MovieList from '../../components/molecules/MovieList';
 import PreviousQueriesList from '../../components/molecules/PreviousQueriesList';
@@ -23,9 +24,9 @@ const NotFoundText = styled.Text`
 export default function SearchScreen() {
   const navigation = useNavigation<SearchScreenRouteProp>();
 
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<any[]>([]);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [showPreviousQueries, setShowPreviousQueries] = useState(true);
 
@@ -37,10 +38,8 @@ export default function SearchScreen() {
     const data = await requestMovieDb(
       `/search/movie?language=es-AR&query=${searchQuery}}&page=1&region=AR`,
     );
-    console.log(data);
     setList(data.results);
     dispatch(pushNewQuery(searchQuery));
-
     setIsLoading(false);
   };
 
@@ -57,6 +56,13 @@ export default function SearchScreen() {
     });
   });
 
+  console.log({
+    contentLoader: isLoading,
+    history: showPreviousQueries && !isLoading,
+    list: !showPreviousQueries && !isLoading && list?.length > 0,
+    notFound: !showPreviousQueries && !isLoading && list?.length === 0,
+  });
+
   return (
     <ScreenContainer>
       {isLoading && (
@@ -67,24 +73,32 @@ export default function SearchScreen() {
           viewBox="0 0 476 300"
           backgroundColor="#0e0b0b"
           foregroundColor="#a69b9b">
-          <Rect x="28" y="7" rx="16" ry="16" width="102" height="154" />
-          <Rect x="140" y="16" rx="0" ry="0" width="215" height="18" />
-          <Rect x="364" y="16" rx="0" ry="0" width="50" height="18" />
-          <Rect x="140" y="39" rx="0" ry="0" width="161" height="14" />
-          <Rect x="309" y="39" rx="0" ry="0" width="79" height="14" />
-          <Rect x="140" y="60" rx="0" ry="0" width="305" height="55" />
-          <Rect x="139" y="126" rx="0" ry="0" width="52" height="25" />
-          <Rect x="196" y="126" rx="0" ry="0" width="66" height="26" />
-          <Rect x="267" y="126" rx="0" ry="0" width="105" height="26" />
+          {[0, 170, 340, 510].map(x => (
+            <Fragment>
+              <Rect x={x + 8} y="7" rx="16" ry="16" width="102" height="154" />
+              <Rect x={x + 120} y="16" rx="0" ry="0" width="215" height="18" />
+              <Rect x={x + 344} y="16" rx="0" ry="0" width="50" height="18" />
+              <Rect x={x + 120} y="39" rx="0" ry="0" width="161" height="14" />
+              <Rect x={x + 289} y="39" rx="0" ry="0" width="79" height="14" />
+              <Rect x={x + 120} y="60" rx="0" ry="0" width="305" height="55" />
+              <Rect x={x + 119} y="126" rx="0" ry="0" width="52" height="25" />
+              <Rect x={x + 176} y="126" rx="0" ry="0" width="66" height="26" />
+              <Rect x={x + 247} y="126" rx="0" ry="0" width="105" height="26" />
+            </Fragment>
+          ))}
         </ContentLoader>
       )}
       {showPreviousQueries && !isLoading && (
         <PreviousQueriesList onPressQuery={handleSearchQuery} />
       )}
-      {!showPreviousQueries && !isLoading && list.length > 0 && (
-        <MovieList movies={list} />
+      {!showPreviousQueries && !isLoading && list?.length > 0 && (
+        <FlatList
+          data={list}
+          renderItem={({item}) => <MovieItem item={item} />}
+          keyExtractor={item => item.id}
+        />
       )}
-      {!showPreviousQueries && isLoading && list.length === 0 && (
+      {!showPreviousQueries && !isLoading && list?.length === 0 && (
         <NotFoundText>Ups! There is no movies for that query </NotFoundText>
       )}
     </ScreenContainer>
