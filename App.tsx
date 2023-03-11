@@ -19,15 +19,13 @@ import {Provider} from 'react-redux';
 let persistor = persistStore(store);
 
 const App = () => {
-  // return (
-  //   <Provider store={store}>
-  //     <PersistGate loading={null} persistor={persistor}>
-  //       <Navigation />
-  //     </PersistGate>
-  //   </Provider>
-  // );
-
-  return <Navigation />;
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Navigation />
+      </PersistGate>
+    </Provider>
+  );
 };
 
 export default App;

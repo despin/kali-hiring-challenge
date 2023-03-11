@@ -1,5 +1,8 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 import {LoginScreen, WelcomeScreen, SignUpScreen} from '../screens';
 
 export type PublicStackParamList = {
@@ -9,6 +12,9 @@ export type PublicStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<PublicStackParamList>();
+
+export type PublicStackRouteProp<T extends keyof PublicStackParamList> =
+  NativeStackNavigationProp<PublicStackParamList, T>;
 
 export default function PublicStack() {
   return (
