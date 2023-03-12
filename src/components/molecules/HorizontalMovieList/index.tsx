@@ -7,19 +7,6 @@ import SectionTitle from '../../atoms/SectionTitle';
 import HorizontalMovieListItem from '../HorizontalMovieListItem';
 import HorizontalMovieSkeleton from '../../atoms/HorizontalMovieSkeleton';
 
-import styled from 'styled-components/native';
-import LinearGradient from 'react-native-linear-gradient';
-
-const Gradient = styled(LinearGradient)`
-  /* flex: 1;
-  padding-left: 15px;
-  padding-right: 15px;
-  /* flex-direction: column-reverse; */
-  border-radius: 16px;
-  padding-bottom: 20px;
-  z-index: 1000; */
-`;
-
 interface HorizontalMovieListProps {
   isLoading: boolean;
   movies: any[];

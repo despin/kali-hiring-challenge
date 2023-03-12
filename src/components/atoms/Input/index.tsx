@@ -1,12 +1,13 @@
 import styled from 'styled-components/native';
 
-const CustomInput = styled.TextInput`
+const Input = styled.TextInput`
   padding: 8px;
   margin: 8px;
   border-radius: 8px;
-  border-color: blue;
+  border-color: red;
   border-style: solid;
   border-width: 1px;
+  color: white;
 `;
 
-export default CustomInput;
+export default Input;

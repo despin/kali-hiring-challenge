@@ -1,5 +1,4 @@
 import React from 'react';
-import useSWR from 'swr';
 import requestMovieDb from '../../api';
 import HorizontalMovieList from '../../components/molecules/HorizontalMovieList';
 import useCustomSWR from '../../hooks/useCustomSWR';

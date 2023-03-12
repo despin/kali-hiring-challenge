@@ -15,6 +15,7 @@ import HorizontalMovieList from '../../components/molecules/HorizontalMovieList'
 import useCustomSWR from '../../hooks/useCustomSWR';
 import requestMovieDb from '../../api';
 import CastList from '../../components/molecules/CastList';
+import {StyleSheet} from 'react-native';
 
 const Scrollable = styled.ScrollView``;
 
@@ -75,6 +76,10 @@ const RatingText = styled.Text`
   font-weight: bold;
 `;
 
+const styles = StyleSheet.create({
+  imageStyle: {borderRadius: 16},
+});
+
 type Props = NativeStackScreenProps<PrivateStackParamList, 'Details'>;
 
 type Navigation = NativeStackNavigationProp<PrivateStackParamList, 'Details'>;
@@ -100,7 +105,7 @@ export default function DetailsScreen({route}: Props) {
     <ScreenContainer>
       <Scrollable>
         <ImageBackground
-          imageStyle={{borderRadius: 16}}
+          imageStyle={styles.imageStyle}
           source={{
             uri: `https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`,
           }}>

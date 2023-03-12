@@ -1,17 +1,15 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import React, {Fragment, useState} from 'react';
 import ContentLoader, {Rect} from 'react-content-loader/native';
-import {FlatList, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import requestMovieDb from '../../api';
 import MovieItem from '../../components/atoms/MovieItem';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
-import MovieList from '../../components/molecules/MovieList';
 import PreviousQueriesList from '../../components/molecules/PreviousQueriesList';
 import {PrivateStackRouteProp} from '../../navigation/private';
-import {useAppDispatch, useTypedSelector} from '../../store';
-import {clearQueries, pushNewQuery} from '../../store/searchHistorySlice';
+import {useAppDispatch} from '../../store';
+import {pushNewQuery} from '../../store/searchHistorySlice';
 
 type SearchScreenRouteProp = PrivateStackRouteProp<'Search'>;
 

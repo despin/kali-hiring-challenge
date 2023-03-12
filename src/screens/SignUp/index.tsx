@@ -1,17 +1,15 @@
 import {Picker} from '@react-native-picker/picker';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
-import styled from 'styled-components/native';
 import Button from '../../components/atoms/Button';
-import {PublicStackParamList} from '../../navigation/public';
 import auth from '@react-native-firebase/auth';
-import CustomInput from '../../components/atoms/Input';
+import Input from '../../components/atoms/Input';
 import {ROLES} from '../../constants';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
+import {StyleSheet} from 'react-native';
 
-const ErrorText = styled.Text`
-  color: red;
-`;
+const styles = StyleSheet.create({
+  picker: {color: '#fff'},
+});
 
 export default function SignUpScreen() {
   const [displayName, setDisplayName] = useState('');
@@ -79,44 +77,50 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View>
-      <Text>Signup</Text>
-      <CustomInput
+    <ScreenContainer>
+      <Input
+        placeholderTextColor={'#FFF'}
         placeholder="Display Name"
         value={displayName}
         onChangeText={setDisplayName}
         keyboardType="ascii-capable"
       />
-      <CustomInput
+      <Input
         placeholder="Email"
+        placeholderTextColor={'#FFF'}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCorrect={false}
         autoCapitalize={'none'}
       />
-      <CustomInput
+      <Input
         placeholder="Password"
+        placeholderTextColor={'#FFF'}
         value={password}
         onChangeText={setPassword}
         keyboardType="ascii-capable"
         secureTextEntry
       />
-      <CustomInput
+      <Input
+        placeholderTextColor={'#FFF'}
         placeholder="Confirm password"
         value={confirmPassword}
         onChangeText={setConfirmPassword}
         keyboardType="ascii-capable"
         secureTextEntry
       />
-      <ErrorText>{error || '✅'}</ErrorText>
-      <Picker selectedValue={role} onValueChange={item => setRole(item)}>
+      <Picker
+        selectedValue={role}
+        onValueChange={item => setRole(item)}
+        itemStyle={styles.picker}
+        style={styles.picker}>
         {Object.entries(ROLES).map(([roleName, displayRoleName]) => (
           <Picker.Item label={displayRoleName} value={roleName} />
         ))}
       </Picker>
 
-      <Button label={'Signup'} onPress={handleLogin} />
-    </View>
+      <Button isLoading={isLoading} label={'Signup'} onPress={handleLogin} />
+    </ScreenContainer>
   );
 }

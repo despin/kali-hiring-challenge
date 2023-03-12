@@ -1,8 +1,4 @@
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
-import Button from '../../components/atoms/Button';
-import {PrivateStackRouteProp} from '../../navigation/private';
-import {ActivityIndicator, ScrollView, Text} from 'react-native';
 import styled from 'styled-components/native';
 
 import NowPlayingSection from './NowPlayingSection';
@@ -10,17 +6,19 @@ import NextMoviesSection from './NextMoviesSection';
 import PopularSection from './PopularSection';
 import TopRatedSection from './TopRatedSection';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
+import useHasRole from '../../hooks/useHasRole';
+import {ROLES} from '../../constants';
 
-const ScrollableScreen = styled.ScrollView`
-  /* padding: 0 0 0 8px; */
-`;
+const ScrollableScreen = styled.ScrollView``;
 
 export default function HomeScreen() {
+  const isPreRelease = useHasRole(ROLES.prerelease);
+
   return (
     <ScreenContainer>
       <ScrollableScreen>
         <NextMoviesSection />
-        <NowPlayingSection />
+        {isPreRelease && <NowPlayingSection />}
         <PopularSection />
         <TopRatedSection />
       </ScrollableScreen>

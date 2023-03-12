@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 interface ContainerProps {
@@ -6,7 +6,7 @@ interface ContainerProps {
 }
 
 const Container = styled.TouchableOpacity<ContainerProps>`
-  background-color: ${props => (props.secondary ? 'black' : 'red')};
+  background-color: ${props => (props.secondary ? '#333' : 'red')};
   border-radius: 8px;
   margin: 8px;
   padding: 8px;

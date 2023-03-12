@@ -30,7 +30,13 @@ const ListItemText = styled.Text`
   margin-top: 16px;
 `;
 
-export default function PreviousQueriesList({onPressQuery}) {
+interface PreviousQueriesListProps {
+  onPressQuery: (query: string) => void;
+}
+
+export default function PreviousQueriesList({
+  onPressQuery,
+}: PreviousQueriesListProps) {
   const searches = useTypedSelector(state => state.searchHistory.searches);
 
   console.log('searches', searches);
@@ -45,12 +51,14 @@ export default function PreviousQueriesList({onPressQuery}) {
         </ListItem>
       )}
       ListHeaderComponent={
-        <ListHeader>
-          <ListTitle>Recent queries 🕑 </ListTitle>
-          <ListClear onPress={() => dispatch(clearQueries())}>
-            <ListClearText>Clear</ListClearText>
-          </ListClear>
-        </ListHeader>
+        searches.length > 0 ? (
+          <ListHeader>
+            <ListTitle>Recent queries 🕑 </ListTitle>
+            <ListClear onPress={() => dispatch(clearQueries())}>
+              <ListClearText>Clear</ListClearText>
+            </ListClear>
+          </ListHeader>
+        ) : undefined
       }
     />
   );

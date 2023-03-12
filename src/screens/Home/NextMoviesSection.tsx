@@ -1,8 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import ContentLoader, {Rect} from 'react-content-loader/native';
-import {Dimensions, View, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Dimensions, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-reanimated-carousel';
 import styled from 'styled-components/native';
@@ -46,6 +45,10 @@ const ItemReleaseDate = styled.Text`
   color: grey;
 `;
 
+const styles = StyleSheet.create({
+  backdrop: {borderRadius: 16},
+});
+
 export default function NextMoviesSection() {
   const {data, isLoading} = useCustomSWR(
     '/movie/upcoming?language=es-AR&page=1&region=AR',
@@ -82,7 +85,7 @@ export default function NextMoviesSection() {
             <CarouselButton
               onPress={() => navigation.navigate('Details', {movie: item})}>
               <ImageBackground
-                imageStyle={{borderRadius: 16}}
+                imageStyle={styles.backdrop}
                 source={{
                   uri: `https://image.tmdb.org/t/p/w500${item?.backdrop_path}`,
                 }}>

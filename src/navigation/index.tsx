@@ -6,7 +6,7 @@ import PublicStack from './public';
 import useFirebaseAuthProvider from '../hooks/useFirebaseAuthProvider';
 
 export default function Navigation() {
-  const {initializing, user} = useFirebaseAuthProvider();
+  const {user} = useFirebaseAuthProvider();
   const isLogged = !!user;
 
   return (
