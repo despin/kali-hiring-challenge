@@ -60,15 +60,18 @@ export default function CastList({movieId}) {
     requestMovieDb,
   );
 
+  const castAndCrew =
+    data?.cast && data?.crew ? [...data.cast, ...data.crew] : [];
+
   return (
     <ListContainer>
-      <CastTitle>Cast</CastTitle>
+      <CastTitle>Cast & Crew</CastTitle>
       {isLoading && <CastListSkeleton />}
       {!isLoading && data && (
         <CollapseTouchable onPress={() => setCollapsed(v => !v)}>
           <FlatList
             disableVirtualization
-            data={collapsed ? data.cast.slice(0, 6) : data.cast}
+            data={collapsed ? castAndCrew.slice(0, 6) : castAndCrew}
             keyExtractor={item => item.id}
             scrollEnabled={false}
             numColumns={2}
@@ -82,7 +85,9 @@ export default function CastList({movieId}) {
                 <Column>
                   <CastName>{item.original_name}</CastName>
 
-                  <CharacterName>{item.original_name}</CharacterName>
+                  <CharacterName>
+                    {item.character ?? `${item.job} (${item.department})`}
+                  </CharacterName>
                 </Column>
               </Row>
             )}
