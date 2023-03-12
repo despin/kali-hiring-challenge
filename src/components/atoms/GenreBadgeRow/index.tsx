@@ -15,6 +15,7 @@ const GenreText = styled.Text`
 interface GenreBadgeRowProps {
   genreIds: number[];
 }
+
 export default function GenreBadgeRow({genreIds}: GenreBadgeRowProps) {
   const genres = useGenres();
 

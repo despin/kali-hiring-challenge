@@ -42,7 +42,9 @@ export default function HorizontalMovieListItem({
       <MoviePoster
         source={{uri: `https://image.tmdb.org/t/p/w500${item?.poster_path}`}}
       />
-      <MovieTitle numberOfLines={1}>{item?.title}</MovieTitle>
+      <MovieTitle numberOfLines={1} testID={'test:/movieTitle'}>
+        {item?.title}
+      </MovieTitle>
       <MovieOriginalTitle numberOfLines={1}>
         {item?.original_title}
       </MovieOriginalTitle>

@@ -17,6 +17,7 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@reduxjs/toolkit": "^1.9.3",
+    "@testing-library/react-native": "^11.5.4",
     "react": "18.1.0",
     "react-content-loader": "^6.2.0",
     "react-native": "0.70.6",

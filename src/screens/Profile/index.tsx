@@ -4,7 +4,7 @@ import DataItem from '../../components/atoms/DataItem';
 import {ROLES} from '../../constants';
 import Button from '../../components/atoms/Button';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
-import useHasRole from '../../hooks/useHasRole';
+import useHasRole from '../../hooks';
 import auth from '@react-native-firebase/auth';
 
 export default function ProfileScreen() {

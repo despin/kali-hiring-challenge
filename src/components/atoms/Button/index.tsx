@@ -39,8 +39,15 @@ type Props = {
 
 export default function Button({onPress, label, secondary, isLoading}: Props) {
   return (
-    <Container secondary={secondary} onPress={onPress}>
-      {isLoading ? <ActivityIndicator /> : <Text>{label}</Text>}
+    <Container
+      secondary={secondary}
+      onPress={onPress}
+      testID="button-container">
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text testID="button-text">{label}</Text>
+      )}
     </Container>
   );
 }
