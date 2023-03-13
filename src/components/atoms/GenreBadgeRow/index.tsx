@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Text} from 'react-native';
 import styled from 'styled-components/native';
 import useGenres from '../../../hooks/useGenres';
 
@@ -20,19 +20,19 @@ interface GenreBadgeRowProps {
 export default function GenreBadgeRow({genreIds}: GenreBadgeRowProps) {
   const {genres, isLoading} = useGenres();
 
-  console.log('genres', genres);
+  const foundGenres =
+    genreIds
+      ?.map(id => genres?.find?.(gId => gId.id === id)?.name)
+      ?.filter(name => !!name) ?? [];
 
-  console.log(genreIds);
+  console.log(foundGenres);
 
   return (
     <Fragment>
       {isLoading && !genres && <ActivityIndicator />}
       {!isLoading &&
-        genres &&
-        genreIds
-          ?.map(id => genres?.find?.(gId => gId.id === id)?.name)
-          ?.sort()
-          ?.map(name => <GenreText>{name}</GenreText>)}
+        !!genres &&
+        foundGenres?.map(name => <GenreText>{name ?? 'N/A'}</GenreText>)}
     </Fragment>
   );
 }
