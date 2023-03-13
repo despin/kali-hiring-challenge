@@ -6,7 +6,7 @@ import NextMoviesSection from './NextMoviesSection';
 import PopularSection from './PopularSection';
 import TopRatedSection from './TopRatedSection';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
-import useHasRole from '../../hooks';
+import useHasRole from '../../hooks/useHasRole';
 import {ROLES} from '../../constants';
 
 const ScrollableScreen = styled.ScrollView``;
